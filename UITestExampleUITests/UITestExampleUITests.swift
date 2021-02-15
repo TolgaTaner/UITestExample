@@ -11,7 +11,6 @@ final class UITestExampleUITests: XCTestCase {
 
     private var app: XCUIApplication!
 
-
     override func setUp() {
         super.setUp()
         //Failure when failure occurs.
@@ -22,17 +21,15 @@ final class UITestExampleUITests: XCTestCase {
 
     func testNavigateToWelcomeViewController() throws {
         app.launch()
+        
         XCTAssertTrue(app.isUsernameTextFieldDisplayed)
         XCTAssertTrue(app.isPasswordTextFieldDisplayed)
         XCTAssertTrue(app.isDoneButtonTextFieldDisplayed)
 
         app.usernameTextField.tap()
-
         app.usernameTextField.typeText("test")
         app.keyboards.buttons["Return"].tap()
 
-        // close the keyboard connectivity.
-        //unselect keyboard
         app.passwordTextField.tap()
         app.keys["t"].tap()
         app.keys["e"].tap()
@@ -41,12 +38,10 @@ final class UITestExampleUITests: XCTestCase {
         app.keyboards.buttons["Return"].tap()
 
         XCTAssertEqual(app.usernameTextField.value as? String, "test")
-        
 
         app.doneButton.tap()
 
         XCTAssertTrue(app.isWelcomeLabelDisplayed)
-
     }
 
     func testLaunchPerformance() throws {
@@ -64,21 +59,17 @@ extension XCUIApplication {
     var usernameTextField: XCUIElement! {
         textFields["usernameTextField"]
     }
-
     var passwordTextField: XCUIElement! {
         secureTextFields["passwordTextField"]
     }
-
     var doneButton: XCUIElement! {
         buttons["doneButton"]
     }
-
     var welcomeLabel: XCUIElement! {
         staticTexts
             .matching(identifier: "welcomeLabel")
             .element
     }
-
     var isPasswordTextFieldDisplayed: Bool {
         passwordTextField.exists
     }
